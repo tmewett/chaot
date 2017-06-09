@@ -1,7 +1,9 @@
+
 function love.load()
 	gfx = love.graphics
+	arena = require 'arena'
 
-	floor = gfx.newImage("assets/floor.png")
+	map = arena.new()
 end
 
 function love.update(dt)
@@ -9,5 +11,5 @@ function love.update(dt)
 end
 
 function love.draw()
-	gfx.draw(floor, 0, 0)
+	arena.draw(map, 0, 0)
 end
