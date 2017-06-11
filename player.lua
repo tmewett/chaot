@@ -1,19 +1,19 @@
 local M = {}
 
 function M.new() 
-    ent = entity.new()
-    
-    --player specific data can be appended to ent
-    ent.tile_x = 1
-    ent.tile_y = 1
-    ent.in_arena = true
-    ent.dead = false
+	ent = entity.new()
+	
+	--player specific data can be appended to ent
+	ent.tile_x = 1
+	ent.tile_y = 1
+	ent.in_arena = true
+	ent.dead = false
 
-    return ent
+	return ent
 end
 
 function M:update(dt)
-    --Get the angle of the mouse relative to the player (screen centre)
+	--Get the angle of the mouse relative to the player (screen centre)
 	mdx = mouse.getX()-midx
 	mdy = mouse.getY()-midy
 
@@ -31,13 +31,13 @@ function M:update(dt)
 
 	len = vlength(mdx, mdy)
 
-    self.vel = len
+	self.vel = len
 	self.aim = aim
 
-    --Apply movement changes
-    entity.update(self, dt)
+	--Apply movement changes
+	entity.update(self, dt)
 
-    --Arena boundaries 
+	--Arena boundaries 
 	if self.x < 0 then
 		self.x = 0
 	elseif self.x > 160 * 8 then
@@ -50,9 +50,8 @@ function M:update(dt)
 		self.y = 160 * 8
 	end
 
-
-    --
-    if self.x >= 0 and self.x <= 160*8 and self.y >=0 and self.y <= 160*8 then
+	--Work out tile coords we are above
+	if self.x >= 0 and self.x <= 160*8 and self.y >=0 and self.y <= 160*8 then
 		self.in_arena = true
 
 		self.tile_x = math.floor((self.x / 160) + 1)
@@ -65,10 +64,10 @@ function M:update(dt)
 		self.tile_y = -1
 	end
 
-    --Kill if on a red square
-    if map[self.tile_x][self.tile_y] == 2 then
-        self.dead = true
-    end
+	--Kill if on a red square
+	if map[self.tile_x][self.tile_y] == 2 then
+		self.dead = true
+	end
 
 
 end
