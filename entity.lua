@@ -16,8 +16,9 @@ end
 function M:update(dt)
 	x = dt * self.vel * math.cos(self.aim)
 	y = dt * self.vel * math.sin(self.aim)
-	self.x = self.x + x
-	self.y = self.y + y
+	self.x = x + self.x
+	self.y = y + self.y
+
 end
 
 return M

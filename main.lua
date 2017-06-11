@@ -17,14 +17,40 @@ function love.load()
 end
 
 function love.update(dt)
-	mdx = math.max(mouse.getX()-320, .01)
-	mdy = mouse.getY()-240
+	mdx = mouse.getX()-midx
+	mdy = mouse.getY()-midy
+
+	local aim = math.atan(mdy/mdx)
+
+	if mdx < 0 and mdy <= 0 then
+		aim = aim + math.pi
+	elseif mdx > 0 and mdy < 0 then
+		aim = aim + math.pi * 2
+	elseif mdx < 0 and mdy > 0 then
+		aim = aim + math.pi
+	elseif mdx == 0 and mdy == 0 then
+		aim = 0
+	end
 
 	len = vlength(mdx, mdy)
-	pl.aim = math.asin(mdy/mdx)
-	pl.vel = math.log(len+1)
+	
+	pl.vel = len
+	pl.aim = aim
 
 	entity.update(pl, dt)
+
+	if pl.x < 0 then
+		pl.x = 0
+	elseif pl.x > 160 * 8 then
+		pl.x = 160*8
+	end
+
+	if pl.y < 0 then
+		pl.y = 0
+	elseif pl.y > 160 * 8 then
+		pl.y = 160 * 8
+	end
+
 end
 
 function love.draw()
@@ -32,6 +58,10 @@ function love.draw()
 	gfx.translate(midx-pl.x, midy-pl.y)
 	arena.draw(map)
 	gfx.pop()
+
+	gfx.print("mdx = " .. mdx, 0, 0)
+	gfx.print("mdy = " .. mdy, 0, 20)
+	gfx.print("angle = " .. pl.aim, 0, 40)
 
 	gfx.setColor(20, 200, 255)
 	gfx.circle('fill', midx, midy, 40)
