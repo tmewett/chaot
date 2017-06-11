@@ -13,8 +13,11 @@ function M.new()
 	}
 end
 
-function M:update()
-
+function M:update(dt)
+	x = dt * self.vel * math.cos(self.aim)
+	y = dt * self.vel * math.sin(self.aim)
+	self.x = self.x + x
+	self.y = self.y + y
 end
 
 return M

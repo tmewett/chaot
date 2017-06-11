@@ -17,14 +17,14 @@ function love.load()
 end
 
 function love.update(dt)
-	mdx = math.min(mouse.getX()-320, .01)
+	mdx = math.max(mouse.getX()-320, .01)
 	mdy = mouse.getY()-240
 
 	len = vlength(mdx, mdy)
 	pl.aim = math.asin(mdy/mdx)
-	pl.vel = len
+	pl.vel = math.log(len+1)
 
-	entity.update(pl)
+	entity.update(pl, dt)
 end
 
 function love.draw()
