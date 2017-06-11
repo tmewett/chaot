@@ -20,7 +20,7 @@ end
 function love.update(dt)
 
 	player.update(pl, dt)
-	
+
 end
 
 function love.draw()
@@ -29,10 +29,16 @@ function love.draw()
 	arena.draw(map)
 	gfx.pop()
 
-	gfx.print("mdx = " .. mdx, 0, 0)
-	gfx.print("mdy = " .. mdy, 0, 20)
-	gfx.print("angle = " .. pl.aim, 0, 40)
+	gfx.print("tile_x = " .. string.format("%.6f", pl.tile_x), 0, 0)
+	gfx.print("tile_y = " .. string.format("%.6f", pl.tile_y), 0, 20)
+	gfx.print("x = " .. pl.x, 0, 40)
+	gfx.print("y = " .. pl.y, 0, 60)
 
-	gfx.setColor(20, 200, 255)
+	if pl.dead == true then
+		gfx.setColor(255, 255, 255)
+	else
+		gfx.setColor(20, 200, 255)
+	end
+	
 	gfx.circle('fill', midx, midy, 40)
 end
