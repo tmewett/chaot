@@ -8,6 +8,10 @@ function love.load()
 	arena = require 'arena'
 	entity = require 'entity'
 	player = require 'player'
+	debug = require 'debug'
+
+	dbg = debug.new()
+
 	midx, midy = 400, 300
 
 	pl = player.new()
