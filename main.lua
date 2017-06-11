@@ -7,9 +7,10 @@ function love.load()
 	mouse = love.mouse
 	arena = require 'arena'
 	entity = require 'entity'
+	player = require 'player'
 	midx, midy = 400, 300
 
-	pl = entity.new()
+	pl = player.new()
 	pl.x = 640
 	pl.y = 480
 	map = arena.new()
@@ -17,40 +18,9 @@ function love.load()
 end
 
 function love.update(dt)
-	mdx = mouse.getX()-midx
-	mdy = mouse.getY()-midy
 
-	local aim = math.atan(mdy/mdx)
-
-	if mdx < 0 and mdy <= 0 then
-		aim = aim + math.pi
-	elseif mdx > 0 and mdy < 0 then
-		aim = aim + math.pi * 2
-	elseif mdx < 0 and mdy > 0 then
-		aim = aim + math.pi
-	elseif mdx == 0 and mdy == 0 then
-		aim = 0
-	end
-
-	len = vlength(mdx, mdy)
+	player.update(pl, dt)
 	
-	pl.vel = len
-	pl.aim = aim
-
-	entity.update(pl, dt)
-
-	if pl.x < 0 then
-		pl.x = 0
-	elseif pl.x > 160 * 8 then
-		pl.x = 160*8
-	end
-
-	if pl.y < 0 then
-		pl.y = 0
-	elseif pl.y > 160 * 8 then
-		pl.y = 160 * 8
-	end
-
 end
 
 function love.draw()
