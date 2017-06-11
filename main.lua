@@ -18,9 +18,7 @@ function love.load()
 end
 
 function love.update(dt)
-
 	player.update(pl, dt)
-
 end
 
 function love.draw()

@@ -40,18 +40,18 @@ function M:update(dt)
 	--Arena boundaries 
 	if self.x < 0 then
 		self.x = 0
-	elseif self.x > 160 * 8 then
-		self.x = 160*8
+	elseif self.x >= 160 * 8 then
+		self.x = (160 * 8) - 1
 	end
 
 	if self.y < 0 then
 		self.y = 0
-	elseif self.y > 160 * 8 then
-		self.y = 160 * 8
+	elseif self.y >= 160 * 8 then
+		self.y = (160 * 8) - 1
 	end
 
 	--Work out tile coords we are above
-	if self.x >= 0 and self.x <= 160*8 and self.y >=0 and self.y <= 160*8 then
+	if self.x >= 0 and self.x <= 160*8 and self.y >= 0 and self.y <= 160*8 then
 		self.in_arena = true
 
 		self.tile_x = math.floor((self.x / 160) + 1)
