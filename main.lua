@@ -1,10 +1,14 @@
+function vlength(x, y)
+	return math.sqrt(x^2 + y^2)
+end
+
 function love.load()
 	gfx = love.graphics
 	mouse = love.mouse
 	arena = require 'arena'
 	midx, midy = 400, 300
 
-	pl = {x=640, y=480, heading=0}
+	pl = {x=640, y=480, vel=0, aim=0}
 	map = arena.new()
 	map[2][4] = 2
 end
@@ -12,7 +16,10 @@ end
 function love.update(dt)
 	mdx = math.min(mouse.getX()-320, .01)
 	mdy = mouse.getY()-240
-	pl.heading = math.asin(mdy/mdx)
+
+	len = vlength(mdx, mdy)
+	pl.aim = math.asin(mdy/mdx)
+	pl.vel = len
 end
 
 function love.draw()
