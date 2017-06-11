@@ -18,7 +18,7 @@ end
 function love.draw()
 	gfx.push()
 	gfx.translate(midx-pl.x, midy-pl.y)
-	arena.draw(map, 0, 0)
+	arena.draw(map)
 	gfx.pop()
 
 	gfx.setColor(20, 200, 255)

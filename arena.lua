@@ -16,12 +16,12 @@ function M.new()
 	return a
 end
 
-function M:draw(x0, y0)
+function M:draw()
 	for x = 1, 8 do
 		for y = 1, 8 do
 			gfx.setColor(color[self[x][y]])
 			-- +1 and -2 to make grid lines
-			gfx.rectangle('fill', x0+(x-1)*160 +1, y0+(y-1)*160 +1, 160-2, 160-2)
+			gfx.rectangle('fill', (x-1)*160 +1, (y-1)*160 +1, 160-2, 160-2)
 		end
 	end
 end
