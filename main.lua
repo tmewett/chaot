@@ -6,9 +6,12 @@ function love.load()
 	gfx = love.graphics
 	mouse = love.mouse
 	arena = require 'arena'
+	entity = require 'entity'
 	midx, midy = 400, 300
 
-	pl = {x=640, y=480, vel=0, aim=0}
+	pl = entity.new()
+	pl.x = 640
+	pl.y = 480
 	map = arena.new()
 	map[2][4] = 2
 end
@@ -20,6 +23,8 @@ function love.update(dt)
 	len = vlength(mdx, mdy)
 	pl.aim = math.asin(mdy/mdx)
 	pl.vel = len
+
+	entity.update(pl)
 end
 
 function love.draw()
