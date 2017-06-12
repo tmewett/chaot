@@ -8,11 +8,13 @@ function M.new()
 	ent.tileY = 1
 	ent.inArena = true
 	ent.dead = false
+	ent.bound = true
 
 	return ent
 end
 
 function M:update(dt)
+
 	--Get the angle of the mouse relative to the player (screen centre)
 	mdx = mouse.getX()-midx
 	mdy = mouse.getY()-midy
@@ -26,29 +28,10 @@ function M:update(dt)
 	--Apply movement changes
 	entity.update(self, dt)
 
-	--Arena boundaries, -1 so tileX&Y don't roll over at the +ve edges
-	self.x = clamp(self.x, 0, 160*8-1)
-	self.y = clamp(self.y, 0, 160*8-1)
-
-	--Work out tile coords we are above
-	if self.x >= 0 and self.x <= 160*8 and self.y >= 0 and self.y <= 160*8 then
-		self.inArena = true
-
-		self.tileX = math.floor((self.x / 160) + 1)
-		self.tileY = math.floor((self.y / 160) + 1)
-	else
-		self.inArena = false
-
-		--not sure this part is necessary
-		self.tileX = -1
-		self.tileY = -1
-	end
-
 	--Kill if on a red square
 	if map[self.tileX][self.tileY] == 2 then
 		self.dead = true
 	end
-
 
 end
 

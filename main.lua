@@ -40,7 +40,7 @@ function love.draw()
 	arena.draw(map)
 	gfx.pop()
 
-	if pl.dead == true then
+	if pl.dead then
 		gfx.setColor(255, 255, 255)
 	else
 		gfx.setColor(20, 200, 255)
