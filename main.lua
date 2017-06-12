@@ -17,6 +17,7 @@ function love.load()
 	arena = require 'arena'
 	entity = require 'entity'
 	player = require 'player'
+	enemy = require 'enemy'
 	-- debug at http://localhost:8000/
 	bird = require 'lovebird'
 
@@ -27,11 +28,14 @@ function love.load()
 	pl.y = 480
 	map = arena.new()
 	map[2][4] = 2
+
+	runner = enemy.new()
 end
 
 function love.update(dt)
 	bird.update()
 	player.update(pl, dt)
+	enemy.update(runner, dt)
 end
 
 function love.keypressed(key)
@@ -44,6 +48,11 @@ function love.draw()
 	gfx.push()
 	gfx.translate(midx-pl.x, midy-pl.y)
 	arena.draw(map)
+
+	--draw enemy
+	gfx.setColor(0, 255, 20)
+	gfx.circle('fill', runner.x, runner.y, 20)
+
 	gfx.pop()
 
 	if pl.dead then
@@ -53,4 +62,5 @@ function love.draw()
 	end
 
 	gfx.circle('fill', midx, midy, 40)
+
 end

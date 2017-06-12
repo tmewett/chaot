@@ -10,6 +10,7 @@ function M.new()
 		-- Actual velocity and aim/heading
 		_vel=0,
 		_aim=0,
+		
 		-- Must stay in arena?
 		bound=false
 	}
