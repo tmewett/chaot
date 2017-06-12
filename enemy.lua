@@ -2,21 +2,20 @@ local M = {}
 
 function M.new() 
 	ent = entity.new()
-	ent.x = -500
-	ent.y = -500
 	--enemy specific data can be appended to ent
 
 	return ent
 end
 
 function M:update(dt)
-	local dx = pl.x - self.x
-	local dy = pl.y - self.y
-
-	self.vel = 150
-	self.aim = math.atan2(dy, dx)
 
     entity.update(self, dt)
+
+	--All enemies kill the player if they touch
+	--TODO: cater for the size of the enemy
+	if self.x >= pl.x - 40 and self.x <= pl.x + 40 and self.y >= pl.y - 40 and self.y <= pl.y + 40 then
+		pl.dead = true
+	end	
 
 end
 

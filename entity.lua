@@ -10,7 +10,7 @@ function M.new()
 		-- Actual velocity and aim/heading
 		_vel=0,
 		_aim=0,
-		
+
 		-- Must stay in arena?
 		bound=false
 	}
@@ -28,6 +28,7 @@ function M:update(dt)
 		self.y = clamp(self.y, 0, 160*8-1)
 	end
 
+	--TODO: change to clamp
 	--Work out tile coords we are above
 	if self.bound or self.x >= 0 and self.x <= 160*8 and self.y >= 0 and self.y <= 160*8 then
 		self.inArena = true
