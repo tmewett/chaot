@@ -26,18 +26,9 @@ function M:update(dt)
 	--Apply movement changes
 	entity.update(self, dt)
 
-	--Arena boundaries
-	if self.x < 0 then
-		self.x = 0
-	elseif self.x >= 160 * 8 then
-		self.x = (160 * 8) - 1
-	end
-
-	if self.y < 0 then
-		self.y = 0
-	elseif self.y >= 160 * 8 then
-		self.y = (160 * 8) - 1
-	end
+	--Arena boundaries, -1 so tileX&Y don't roll over at the +ve edges
+	self.x = clamp(self.x, 0, 160*8-1)
+	self.y = clamp(self.y, 0, 160*8-1)
 
 	--Work out tile coords we are above
 	if self.x >= 0 and self.x <= 160*8 and self.y >= 0 and self.y <= 160*8 then

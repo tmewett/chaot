@@ -2,6 +2,15 @@ function vlength(x, y)
 	return math.sqrt(x^2 + y^2)
 end
 
+function clamp(x, min, max)
+	if x < min then
+		x = min
+	elseif x > max then
+		x = max
+	end
+	return x
+end
+
 function love.load()
 	gfx = love.graphics
 	mouse = love.mouse
