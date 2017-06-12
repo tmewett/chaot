@@ -1,12 +1,12 @@
 local M = {}
 
-function M.new() 
+function M.new()
 	ent = entity.new()
-	
+
 	--player specific data can be appended to ent
-	ent.tile_x = 1
-	ent.tile_y = 1
-	ent.in_arena = true
+	ent.tileX = 1
+	ent.tileY = 1
+	ent.inArena = true
 	ent.dead = false
 
 	return ent
@@ -37,7 +37,7 @@ function M:update(dt)
 	--Apply movement changes
 	entity.update(self, dt)
 
-	--Arena boundaries 
+	--Arena boundaries
 	if self.x < 0 then
 		self.x = 0
 	elseif self.x >= 160 * 8 then
@@ -52,20 +52,20 @@ function M:update(dt)
 
 	--Work out tile coords we are above
 	if self.x >= 0 and self.x <= 160*8 and self.y >= 0 and self.y <= 160*8 then
-		self.in_arena = true
+		self.inArena = true
 
-		self.tile_x = math.floor((self.x / 160) + 1)
-		self.tile_y = math.floor((self.y / 160) + 1)
+		self.tileX = math.floor((self.x / 160) + 1)
+		self.tileY = math.floor((self.y / 160) + 1)
 	else
-		self.in_arena = false
+		self.inArena = false
 
 		--not sure this part is necessary
-		self.tile_x = -1
-		self.tile_y = -1
+		self.tileX = -1
+		self.tileY = -1
 	end
 
 	--Kill if on a red square
-	if map[self.tile_x][self.tile_y] == 2 then
+	if map[self.tileX][self.tileY] == 2 then
 		self.dead = true
 	end
 
