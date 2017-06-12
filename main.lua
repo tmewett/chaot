@@ -34,6 +34,12 @@ function love.update(dt)
 	player.update(pl, dt)
 end
 
+function love.keypressed(key)
+   if key == "escape" then
+      love.event.quit()
+   end
+end
+
 function love.draw()
 	gfx.push()
 	gfx.translate(midx-pl.x, midy-pl.y)
