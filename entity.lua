@@ -14,8 +14,8 @@ function M.new()
 end
 
 function M:update(dt)
-	x = dt * self.vel * math.cos(self.aim)
-	y = dt * self.vel * math.sin(self.aim)
+	local x = dt * self.vel * math.cos(self.aim)
+	local y = dt * self.vel * math.sin(self.aim)
 	self.x = x + self.x
 	self.y = y + self.y
 end

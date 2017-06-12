@@ -17,19 +17,8 @@ function M:update(dt)
 	mdx = mouse.getX()-midx
 	mdy = mouse.getY()-midy
 
-	local aim = math.atan(mdy/mdx)
-
-	if mdx < 0 and mdy <= 0 then
-		aim = aim + math.pi
-	elseif mdx > 0 and mdy < 0 then
-		aim = aim + math.pi * 2
-	elseif mdx < 0 and mdy > 0 then
-		aim = aim + math.pi
-	elseif mdx == 0 and mdy == 0 then
-		aim = 0
-	end
-
-	len = vlength(mdx, mdy)
+	local aim = math.atan2(mdy, mdx)
+	local len = vlength(mdx, mdy)
 
 	self.vel = len
 	self.aim = aim
