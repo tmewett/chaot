@@ -8,9 +8,8 @@ function love.load()
 	arena = require 'arena'
 	entity = require 'entity'
 	player = require 'player'
-	debug = require 'debug'
-
-	dbg = debug.new()
+	-- debug at http://localhost:8000/
+	bird = require 'lovebird'
 
 	midx, midy = 400, 300
 
@@ -22,6 +21,7 @@ function love.load()
 end
 
 function love.update(dt)
+	bird.update()
 	player.update(pl, dt)
 end
 
@@ -31,16 +31,11 @@ function love.draw()
 	arena.draw(map)
 	gfx.pop()
 
-	gfx.print("tile_x = " .. string.format("%.6f", pl.tile_x), 0, 0)
-	gfx.print("tile_y = " .. string.format("%.6f", pl.tile_y), 0, 20)
-	gfx.print("x = " .. pl.x, 0, 40)
-	gfx.print("y = " .. pl.y, 0, 60)
-
 	if pl.dead == true then
 		gfx.setColor(255, 255, 255)
 	else
 		gfx.setColor(20, 200, 255)
 	end
-	
+
 	gfx.circle('fill', midx, midy, 40)
 end
