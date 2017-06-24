@@ -18,7 +18,7 @@ function love.load()
 	entity = require 'entity'
 	player = require 'player'
 	enemy = require 'enemy'
-	runner = require 'enemies/runner'
+
 	-- debug at http://localhost:8000/
 	bird = require 'lovebird'
 
@@ -33,17 +33,23 @@ function love.load()
 	testRunner = runner.new()
 	testRunner.x = -500
 	testRunner.y = -500
+
+	testBurner = burner.new()
+	testBurner.x = 2000
+	testBurner.y = 2000
+
 end
 
 function love.update(dt)
 	bird.update()
 	player.update(pl, dt)
 	runner.update(testRunner, dt)
+	burner.update(testBurner, dt)
 end
 
 function love.keypressed(key)
    if key == "escape" then
-      love.event.quit()
+	  love.event.quit()
    end
 end
 
@@ -52,14 +58,23 @@ function love.draw()
 	gfx.translate(midx-pl.x, midy-pl.y)
 	arena.draw(map)
 
-	--draw enemy
+	--draw runner
 	gfx.setColor(0, 255, 20)
 	gfx.circle('fill', testRunner.x, testRunner.y, 20)
+
+	--draw burner
+	if testBurner.onFire then
+		gfx.setColor(255, 165, 0)
+	else
+		gfx.setColor(139, 69, 19)
+	end
+
+	gfx.circle('fill', testBurner.x, testBurner.y, 25)
 
 	gfx.pop()
 
 	if pl.dead then
-		gfx.setColor(255, 255, 255)
+		gfx.setColor(255, 128, 128)
 	else
 		gfx.setColor(20, 200, 255)
 	end

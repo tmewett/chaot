@@ -10,6 +10,8 @@ function M.new()
 		-- Actual velocity and aim/heading
 		_vel=0,
 		_aim=0,
+		
+		spawnTime = love.timer.getTime(),
 
 		-- Must stay in arena?
 		bound=false
