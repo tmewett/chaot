@@ -10,7 +10,7 @@ function M.new()
 		-- Actual velocity and aim/heading
 		_vel=0,
 		_aim=0,
-		
+
 		spawnTime = love.timer.getTime(),
 
 		-- Must stay in arena?
@@ -19,8 +19,22 @@ function M.new()
 end
 
 function M:update(dt)
-	local x = dt * self.vel * math.cos(self.aim)
-	local y = dt * self.vel * math.sin(self.aim)
+	local daim = self.aim - self._aim
+	local dvel = self.vel - self._vel
+
+	-- TODO fix turning the wrong way at +/- pi
+	local turn = clamp(daim, -0.1, 0.1)
+	local accel
+	if dvel >= 0 then
+		accel = 2
+	elseif dvel < 0 or math.abs(daim) <= math.pi/2 then
+		accel = -3
+	end
+	self._vel = self._vel + accel
+	self._aim = self._aim + turn
+
+	local x = dt * self._vel * math.cos(self._aim)
+	local y = dt * self._vel * math.sin(self._aim)
 	self.x = x + self.x
 	self.y = y + self.y
 
