@@ -22,12 +22,15 @@ function M:update(dt)
 	local daim = self.aim - self._aim
 	local dvel = self.vel - self._vel
 
+	if math.abs(daim) > math.pi then
+		daim = -(2*math.pi-daim)
+	end
 	-- TODO fix turning the wrong way at +/- pi
 	local turn = clamp(daim, -0.1, 0.1)
 	local accel
 	if dvel >= 0 then
 		accel = 2
-	elseif dvel < 0 or math.abs(daim) <= math.pi/2 then
+	elseif dvel < 0 or math.abs(daim) > math.pi/2 then
 		accel = -3
 	end
 	self._vel = self._vel + accel
