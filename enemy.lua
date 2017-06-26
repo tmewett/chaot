@@ -1,9 +1,10 @@
 local M = {}
 
-runner = require 'enemies/runner'
-burner = require 'enemies/burner'
+for _, n in ipairs({"runner", "burner"}) do
+	M[n] = require('enemies/'..n)
+end
 
-function M.new() 
+function M.new()
 	ent = entity.new()
 	--enemy specific data can be appended to ent
 
@@ -18,7 +19,7 @@ function M:update(dt)
 	--TODO: cater for the size of the enemy
 	if self.x >= pl.x - 40 and self.x <= pl.x + 40 and self.y >= pl.y - 40 and self.y <= pl.y + 40 and not pl.dead then
 		pl.dead = true
-	end	
+	end
 
 end
 

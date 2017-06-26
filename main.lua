@@ -30,11 +30,11 @@ function love.load()
 	map = arena.new()
 	map[2][4] = 2
 
-	testRunner = runner.new()
+	testRunner = enemy.runner.new()
 	testRunner.x = -500
 	testRunner.y = -500
 
-	testBurner = burner.new()
+	testBurner = enemy.burner.new()
 	testBurner.x = 2000
 	testBurner.y = 2000
 
@@ -43,8 +43,8 @@ end
 function love.update(dt)
 	bird.update()
 	player.update(pl, dt)
-	runner.update(testRunner, dt)
-	burner.update(testBurner, dt)
+	enemy.runner.update(testRunner, dt)
+	enemy.burner.update(testBurner, dt)
 end
 
 function love.keypressed(key)
