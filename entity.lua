@@ -10,6 +10,9 @@ function M.new()
 		-- Actual velocity and aim/heading
 		_vel=0,
 		_aim=0,
+		-- Linear accel and terminal angular vel, both per second
+		accel=200,
+		maxTurn=6,
 
 		spawnTime = love.timer.getTime(),
 
@@ -31,14 +34,15 @@ function M:update(dt)
 		daim = -daim/mag * (2*math.pi-mag)
 	end
 
-	local turn = clamp(daim, -0.1, 0.1)
+	local turn = self.maxTurn*dt
+	turn = clamp(daim, -turn, turn)
 	local accel
 	if dvel >= 0 then
-		accel = 2
+		accel = self.accel
 	elseif dvel < 0 or mag > math.pi/2 then
-		accel = -3
+		accel = -self.accel
 	end
-	self._vel = self._vel + accel
+	self._vel = self._vel + accel*dt
 	self._aim = self._aim + turn
 
 	local x = dt * self._vel * math.cos(self._aim)
