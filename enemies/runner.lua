@@ -1,7 +1,8 @@
 local M = {}
 
-function M.new() 
+function M.new()
 	en = enemy.new()
+	setindex(en, M)
 
 	return en
 end

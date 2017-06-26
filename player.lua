@@ -2,6 +2,7 @@ local M = {}
 
 function M.new()
 	ent = entity.new()
+	setindex(ent, M)
 
 	ent.dead = false
 	ent.bound = true

@@ -1,7 +1,9 @@
 local M = {}
 
-function M.new() 
+function M.new()
 	en = enemy.new()
+	setindex(en, M)
+
 	en.onFire = true
 	en.vel = 200
 	return en

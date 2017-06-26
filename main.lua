@@ -2,6 +2,12 @@ function vlength(x, y)
 	return math.sqrt(x^2 + y^2)
 end
 
+function setindex(t, i)
+	local mt = getmetatable(t) or {}
+	mt.__index = i
+	setmetatable(t, mt)
+end
+
 function clamp(x, min, max)
 	if x < min then
 		x = min
@@ -42,9 +48,9 @@ end
 
 function love.update(dt)
 	bird.update()
-	player.update(pl, dt)
-	enemy.runner.update(testRunner, dt)
-	enemy.burner.update(testBurner, dt)
+	pl:update(dt)
+	testRunner:update(dt)
+	testBurner:update(dt)
 end
 
 function love.keypressed(key)
