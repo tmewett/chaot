@@ -22,15 +22,20 @@ function M:update(dt)
 	local daim = self.aim - self._aim
 	local dvel = self.vel - self._vel
 
-	if math.abs(daim) > math.pi then
-		daim = -(2*math.pi-daim)
+	-- Due to the discontinuity in atan2, the signed daim is not always in the
+	-- shortest direction. So check if we need to reverse it
+	-- mag is |daim| in [0, 2pi)
+	local mag = math.fmod(math.abs(daim), 2*math.pi)
+	if mag > math.pi then
+		-- reverse sign, complement angle
+		daim = -daim/mag * (2*math.pi-mag)
 	end
-	-- TODO fix turning the wrong way at +/- pi
+
 	local turn = clamp(daim, -0.1, 0.1)
 	local accel
 	if dvel >= 0 then
 		accel = 2
-	elseif dvel < 0 or math.abs(daim) > math.pi/2 then
+	elseif dvel < 0 or mag > math.pi/2 then
 		accel = -3
 	end
 	self._vel = self._vel + accel
