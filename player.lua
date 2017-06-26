@@ -3,10 +3,6 @@ local M = {}
 function M.new()
 	ent = entity.new()
 
-	--player specific data can be appended to ent
-	ent.tileX = 1
-	ent.tileY = 1
-	ent.inArena = true
 	ent.dead = false
 	ent.bound = true
 
@@ -20,9 +16,10 @@ function M:update(dt)
 	mdy = mouse.getY()-midy
 
 	local aim = math.atan2(mdy, mdx)
-	local len = vlength(mdx, mdy)
+	local vel = vlength(mdx, mdy)
+	vel = math.min(vel+100, 400)
 
-	self.vel = len
+	self.vel = vel
 	self.aim = aim
 
 	--Apply movement changes
