@@ -1,4 +1,5 @@
 local M = {}
+M.side = 160
 
 local color = {
 	[1]={50,50,50},
@@ -21,7 +22,7 @@ function M:draw()
 		for y = 1, 8 do
 			gfx.setColor(color[self[x][y]])
 			-- +1 and -2 to make grid lines
-			gfx.rectangle('fill', (x-1)*160 +1, (y-1)*160 +1, 160-2, 160-2)
+			gfx.rectangle('fill', (x-1)*M.side +1, (y-1)*M.side +1, M.side-2, M.side-2)
 		end
 	end
 end
