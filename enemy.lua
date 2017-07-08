@@ -23,4 +23,31 @@ function M:update(dt)
 
 end
 
+--[[ seq[<type>] is a mapping from seconds of game time to a table {n, p}
+describing a binomial probability distribution. If a key is missing,
+the previous defined value is used. For n=1 dists, a single number can be given. ]]
+local seqLast = {}
+local seq = {}
+seq.runner = {
+	[0]={3, 1}
+}
+
+--[[ Spawns a number of the given enemy according to the probability
+dist. in seq at time t. ]]
+local function spawnType(name, t)
+	sec = math.floor(t)
+
+	dist = seq[name][sec] or seqLast[name] or {0, 0}
+	if type(dist) == 'number' then
+		dist = {1, dist}
+	end
+	seqLast[name] = dist
+
+	for i = 1, dist[1] do
+		if math.random() < dist[2] then
+			M[name].spawn()
+		end
+	end
+end
+
 return M
