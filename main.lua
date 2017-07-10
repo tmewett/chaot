@@ -28,6 +28,7 @@ function love.load()
 	entity = require 'entity'
 	player = require 'player'
 	enemy = require 'enemy'
+	getTime = love.timer.getTime
 
 	-- debug at http://localhost:8000/
 	bird = require 'lovebird'
@@ -43,19 +44,26 @@ function love.load()
 	map = arena.new()
 	map[2][4] = 2
 
-	testRunner = enemy.runner.new()
-	testRunner:spawn()
-
 	testBurner = enemy.burner.new()
 	testBurner.x = 2000
 	testBurner.y = 2000
 	testBurner:spawn()
 
+	startTime = getTime()
+	second = -1
 end
 
 function love.update(dt)
 	bird.update()
+
+	local sec = math.floor(getTime()-startTime)
+	if sec > second then
+		second = sec
+		enemy.spawnAll(second)
+	end
+
 	pl:update(dt)
+
 	for _, en in ipairs(enemy.active) do
 		en:update(dt)
 	end
@@ -73,8 +81,11 @@ function love.draw()
 	arena.draw(map)
 
 	--draw runner
+	-- Need to have enemies draw themselves in a method
 	gfx.setColor(0, 255, 20)
-	gfx.circle('fill', testRunner.x, testRunner.y, 20)
+	for _, run in ipairs(enemy.active) do
+		gfx.circle('fill', run.x, run.y, 20)
+	end
 
 	--draw burner
 	if testBurner.onFire then

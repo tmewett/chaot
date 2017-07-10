@@ -1,6 +1,7 @@
 local M = {}
+local allTypes = {"runner", "burner"}
 
-for _, n in ipairs({"runner", "burner"}) do
+for _, n in ipairs(allTypes) do
 	M[n] = require('enemies/'..n)
 end
 
@@ -39,11 +40,10 @@ seq.runner = {
 }
 
 --[[ Spawns a number of the given enemy according to the probability
-dist. in seq at time t. ]]
-local function spawnType(name, t)
-	local sec = math.floor(t)
+dist. in seq at time sec. ]]
+local function spawnType(name, sec)
 
-	local dist = seq[name][sec] or seqLast[name] or {0, 0}
+	local dist = (seq[name] or {})[sec] or seqLast[name] or {0, 0}
 	if type(dist) == 'number' then
 		dist = {1, dist}
 	end
@@ -51,8 +51,14 @@ local function spawnType(name, t)
 
 	for i = 1, dist[1] do
 		if math.random() < dist[2] then
-			M[name].spawn()
+			M[name].new():spawn()
 		end
+	end
+end
+
+function M.spawnAll(t)
+	for _, name in ipairs(allTypes) do
+		spawnType(name, t)
 	end
 end
 
