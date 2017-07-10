@@ -11,32 +11,35 @@ function M.new()
 	local xweight = (arenax / (arenax + arenay)) / 2
 	local yweight = (arenay / (arenax + arenay)) / 2
 
-	-- Just for debug
-	local spawnside = ""
-	
+	local spawnx, spawny = 0
+
 	local rand = math.random()
 
 	if rand < xweight then
-		en.spawnside = "top"
-		en.spawnx = math.random(0, arena.side * arenax)
-		en.spawny = math.random(-100, -20)
+		-- top spawn
+		spawnx = math.random(0, arena.side * arenax)
+		spawny = arena.side * -1
 	elseif rand < xweight + yweight then
-		en.spawnside = "right"
-		en.spawnx = math.random((arena.side * arenax) + 20, (arena.side * arenax) + 100)
-		en.spawny = math.random(0, arena.side * arenay)
+		-- right spawn
+		spawnx = arena.side * (arenax + 1)
+		spawny = math.random(0, arena.side * arenay)
 	elseif rand < xweight + (2 * yweight) then
-		en.spawnside = "left"
-		en.spawnx = math.random(-100, -20)
-		en.spawny = math.random(0, arena.side * arenay)
+		-- left spawn
+		spawnx = arena.side * -1
+		spawny = math.random(0, arena.side * arenay)
 	else
-		en.spawnside = "bottom"
-		en.spawnx = math.random(0, arena.side * arenax)
-		en.spawny = math.random((arena.side * arenay) + 20, (arena.side * arenay) + 100)
+		-- bottom spawn
+		spawnx = math.random(0, arena.side * arenax)
+		spawny = arena.side * (arenay + 1)
 	end
 
-	en.x = en.spawnx
-	en.y = en.spawny
+	en.x = spawnx
+	en.y = spawny
 
+	--[[ debug option
+	en.spawnx = spawnx
+	en.spawny = spawny]]
+	
 	return en
 end
 
