@@ -1,7 +1,7 @@
 local M = {}
 
 function M.new()
-	ent = entity.new()
+	local ent = entity.new()
 	setindex(ent, M)
 
 	ent.dead = false

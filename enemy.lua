@@ -5,9 +5,7 @@ for _, n in ipairs({"runner", "burner"}) do
 end
 
 function M.new()
-	ent = entity.new()
-	--enemy specific data can be appended to ent
-
+	local ent = entity.new()
 	return ent
 end
 
@@ -35,9 +33,9 @@ seq.runner = {
 --[[ Spawns a number of the given enemy according to the probability
 dist. in seq at time t. ]]
 local function spawnType(name, t)
-	sec = math.floor(t)
+	local sec = math.floor(t)
 
-	dist = seq[name][sec] or seqLast[name] or {0, 0}
+	local dist = seq[name][sec] or seqLast[name] or {0, 0}
 	if type(dist) == 'number' then
 		dist = {1, dist}
 	end

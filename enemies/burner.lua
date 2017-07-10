@@ -1,7 +1,7 @@
 local M = {}
 
 function M.new()
-	en = enemy.new()
+	local en = enemy.new()
 	setindex(en, M)
 
 	en.onFire = true
@@ -23,7 +23,7 @@ function M:update(dt)
 
 	self.onFire = math.floor(math.mod((love.timer.getTime() - self.spawnTime)/timer, 2)) == 0
 
-	if self.onFire == true then
+	if self.onFire then
 		self.vel = 250
 	else
 		self.vel = 50
