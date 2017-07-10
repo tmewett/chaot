@@ -2,7 +2,7 @@ local M = {}
 
 function M.new()
 	local ent = entity.new()
-	setindex(ent, M)
+	mixin(ent, M)
 
 	ent.dead = false
 	ent.bound = true

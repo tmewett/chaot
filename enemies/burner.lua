@@ -2,7 +2,7 @@ local M = {}
 
 function M.new()
 	local en = enemy.new()
-	setindex(en, M)
+	mixin(en, M)
 
 	en.onFire = true
 	en.vel = 200

@@ -6,6 +6,7 @@ end
 
 function M.new()
 	local ent = entity.new()
+	mixin(ent, M)
 	return ent
 end
 

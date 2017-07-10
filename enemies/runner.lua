@@ -2,7 +2,7 @@ local M = {}
 
 function M.new()
 	local en = enemy.new()
-	setindex(en, M)
+	mixin(en, M)
 
 	return en
 end

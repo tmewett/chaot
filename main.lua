@@ -2,9 +2,13 @@ function vlength(x, y)
 	return math.sqrt(x^2 + y^2)
 end
 
-function setindex(t, i)
+function mixin(t, i)
 	local mt = getmetatable(t) or {}
-	mt.__index = i
+	index = mt.__index or {}
+	for k,v in pairs(i) do
+		index[k] = v
+	end
+	mt.__index = index
 	setmetatable(t, mt)
 end
 
