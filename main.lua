@@ -43,18 +43,21 @@ function love.load()
 	testRunner = enemy.runner.new()
 	testRunner.x = -500
 	testRunner.y = -500
+	testRunner:spawn()
 
 	testBurner = enemy.burner.new()
 	testBurner.x = 2000
 	testBurner.y = 2000
+	testBurner:spawn()
 
 end
 
 function love.update(dt)
 	bird.update()
 	pl:update(dt)
-	testRunner:update(dt)
-	testBurner:update(dt)
+	for _, en in ipairs(enemy.active) do
+		en:update(dt)
+	end
 end
 
 function love.keypressed(key)

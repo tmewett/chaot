@@ -7,7 +7,14 @@ end
 function M.new()
 	local ent = entity.new()
 	mixin(ent, M)
+
 	return ent
+end
+
+-- Append the instance to the list of actives.
+M.active = {}
+function M:spawn()
+	M.active[#M.active+1] = self
 end
 
 function M:update(dt)
