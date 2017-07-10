@@ -32,6 +32,9 @@ function love.load()
 	-- debug at http://localhost:8000/
 	bird = require 'lovebird'
 
+	-- seed to timestamp
+	math.randomseed(os.time())
+
 	midx, midy = 400, 300
 
 	pl = player.new()
@@ -41,8 +44,6 @@ function love.load()
 	map[2][4] = 2
 
 	testRunner = enemy.runner.new()
-	testRunner.x = -500
-	testRunner.y = -500
 	testRunner:spawn()
 
 	testBurner = enemy.burner.new()
