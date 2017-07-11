@@ -36,7 +36,7 @@ the previous defined value is used. For n=1 dists, a single number can be given.
 local seqLast = {}
 local seq = {}
 seq.runner = {
-	[0]={3, 1}
+	[0]={2, 3/4}
 }
 
 --[[ Spawns a number of the given enemy according to the probability

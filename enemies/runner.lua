@@ -4,6 +4,10 @@ function M.new()
 	local en = enemy.new()
 	mixin(en, M)
 
+	en.vel = 300
+	en._vel = en.vel
+	en.maxTurn = 0
+
 	-- TODO: fetch from arena.lua once it's parameterised there
 	local arenax = 8
 	local arenay = 8
@@ -36,10 +40,12 @@ function M.new()
 	en.x = spawnx
 	en.y = spawny
 
+	en._aim = math.atan2(pl.y - en.y, pl.x - en.x)
+
 	--[[ debug option
 	en.spawnx = spawnx
 	en.spawny = spawny]]
-	
+
 	return en
 end
 
@@ -48,7 +54,6 @@ function M:update(dt)
 	local dx = pl.x - self.x
 	local dy = pl.y - self.y
 
-	self.vel = 150
 	self.aim = math.atan2(dy, dx)
 
 	enemy.update(self, dt)
