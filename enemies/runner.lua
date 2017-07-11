@@ -6,7 +6,8 @@ function M.new()
 
 	en.vel = 300
 	en._vel = en.vel
-	en.maxTurn = 0
+	en.maxTurn = 0.5
+	en.missed = false
 
 	-- TODO: fetch from arena.lua once it's parameterised there
 	local arenax = 8
@@ -51,11 +52,15 @@ end
 
 function M:update(dt)
 	--This enemy runs straight at the player
-	local dx = pl.x - self.x
-	local dy = pl.y - self.y
+	if self.daim < self.maxTurn * 0.9 and self.missed == false then
+		local dx = pl.x - self.x
+		local dy = pl.y - self.y
 
-	self.aim = math.atan2(dy, dx)
-
+		self.aim = math.atan2(dy, dx)
+	else
+		self.missed = true
+	end
+	
 	enemy.update(self, dt)
 end
 

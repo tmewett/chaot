@@ -10,6 +10,8 @@ function M.new()
 		-- Actual velocity and aim/heading
 		_vel=0,
 		_aim=0,
+
+		daim=0,
 		-- Linear accel and terminal angular vel, both per second
 		accel=200,
 		maxTurn=6,
@@ -22,20 +24,20 @@ function M.new()
 end
 
 function M:update(dt)
-	local daim = self.aim - self._aim
+	self.daim = self.aim - self._aim
 	local dvel = self.vel - self._vel
 
 	-- Due to the discontinuity in atan2, the signed daim is not always in the
 	-- shortest direction. So check if we need to reverse it
 	-- mag is |daim| in [0, 2pi)
-	local mag = math.fmod(math.abs(daim), 2*math.pi)
+	local mag = math.fmod(math.abs(self.daim), 2*math.pi)
 	if mag > math.pi then
 		-- reverse sign, complement angle
-		daim = -daim/mag * (2*math.pi-mag)
+		self.daim = -self.daim/mag * (2*math.pi-mag)
 	end
 
 	local turn = self.maxTurn*dt
-	turn = clamp(daim, -turn, turn)
+	turn = clamp(self.daim, -turn, turn)
 	local accel
 	if dvel >= 0 then
 		accel = self.accel
