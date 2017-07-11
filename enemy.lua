@@ -18,6 +18,15 @@ function M:spawn()
 	M.active[#M.active+1] = self
 end
 
+function M:despawn()
+	for i, en in ipairs(enemy.active) do
+		if en == self then
+			table.remove(enemy.active, i)
+			return
+		end
+	end
+end
+
 function M:update(dt)
 
 	entity.update(self, dt)
@@ -28,6 +37,9 @@ function M:update(dt)
 		pl.dead = true
 	end
 
+	if self.tileX < -1 or self.tileX > arena.width+1 or self.tileY < -1 or self.tileY > arena.width+1 then
+		self:despawn()
+	end
 end
 
 --[[ seq[<type>] is a mapping from seconds of game time to a table {n, p}
