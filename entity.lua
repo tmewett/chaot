@@ -50,25 +50,22 @@ function M:update(dt)
 	self.x = x + self.x
 	self.y = y + self.y
 
+	local awidth, aheight = arena.width*arena.side, arena.height*arena.side
+
 	if self.bound then
 		--Arena boundaries, -1 so tileX&Y don't roll over at the +ve edges
-		self.x = clamp(self.x, 0, 160*8-1)
-		self.y = clamp(self.y, 0, 160*8-1)
+		self.x = clamp(self.x, 0, awidth-1)
+		self.y = clamp(self.y, 0, aheight-1)
 	end
 
-	--TODO: change to clamp
-	--Work out tile coords we are above
-	if self.bound or self.x >= 0 and self.x <= 160*8 and self.y >= 0 and self.y <= 160*8 then
-		self.inArena = true
+	self.tileX = math.floor(self.x / 160)+1
+	self.tileY = math.floor(self.y / 160)+1
 
-		self.tileX = math.floor(self.x / 160)+1
-		self.tileY = math.floor(self.y / 160)+1
+	-- could be rewritten to use tileX&Y
+	if self.bound or self.x >= 0 and self.x <= awidth and self.y >= 0 and self.y <= aheight then
+		self.inArena = true
 	else
 		self.inArena = false
-
-		--not sure this part is necessary
-		self.tileX = -1
-		self.tileY = -1
 	end
 end
 
