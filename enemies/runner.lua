@@ -52,7 +52,7 @@ end
 
 function M:update(dt)
 	--This enemy runs straight at the player
-	if self.daim < self.maxTurn * 0.9 and self.missed == false then
+	if math.abs(self.daim) < math.abs(self.maxTurn * 0.9) and self.missed == false then
 		local dx = pl.x - self.x
 		local dy = pl.y - self.y
 
