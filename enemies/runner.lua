@@ -5,7 +5,6 @@ function M.new()
 	mixin(en, M)
 
 	en.vel = 300
-	en._vel = en.vel
 	en.maxTurn = 0
 
 	local arenax = arena.width
@@ -38,8 +37,6 @@ function M.new()
 
 	en.x = spawnx
 	en.y = spawny
-
-	en._aim = math.atan2(pl.y - en.y, pl.x - en.x)
 
 	--[[ debug option
 	en.spawnx = spawnx

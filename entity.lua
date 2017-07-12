@@ -8,8 +8,8 @@ function M.new()
 		vel=0,
 		aim=0,
 		-- Actual velocity and aim/heading
-		_vel=0,
-		_aim=0,
+		_vel=nil,
+		_aim=nil,
 		-- Linear accel and terminal angular vel, both per second
 		accel=200,
 		maxTurn=6,
@@ -22,6 +22,13 @@ function M.new()
 end
 
 function M:update(dt)
+	if not self._vel then
+		self._vel = self.vel
+	end
+	if not self._aim then
+		self._aim = self.aim
+	end
+
 	local daim = self.aim - self._aim
 	local dvel = self.vel - self._vel
 
