@@ -1,7 +1,7 @@
 local M = {}
 
 function M.new()
-	return {
+	local ent = {
 		x=0,
 		y=0,
 		-- Targets
@@ -19,6 +19,8 @@ function M.new()
 		-- Must stay in arena?
 		bound=false
 	}
+	mixin(ent, M)
+	return ent
 end
 
 function M:update(dt)
