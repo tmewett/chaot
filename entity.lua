@@ -4,6 +4,7 @@ function M.new()
 	local ent = {
 		x=0,
 		y=0,
+		radius=arena.side/4,
 		-- Targets
 		vel=0,
 		aim=0,
@@ -21,6 +22,15 @@ function M.new()
 	}
 	mixin(ent, M)
 	return ent
+end
+
+function M:colliding(ent)
+	local dx = ent.x - self.x
+	local dy = ent.y - self.y
+	if vlength(dx, dy) < self.radius + ent.radius then
+		return true
+	end
+	return false
 end
 
 function M:update(dt)

@@ -4,6 +4,7 @@ function M.new()
 	local en = enemy.new()
 	mixin(en, M)
 
+	en.radius = 20
 	en.vel = 300
 	en.maxTurn = 0
 

@@ -4,6 +4,7 @@ function M.new()
 	local en = enemy.new()
 	mixin(en, M)
 
+	en.radius = 25
 	en.onFire = true
 	en.vel = 200
 	return en

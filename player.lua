@@ -4,6 +4,7 @@ function M.new()
 	local ent = entity.new()
 	mixin(ent, M)
 
+	ent.radius = arena.side/4
 	ent.dead = false
 	ent.bound = true
 

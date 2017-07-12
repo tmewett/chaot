@@ -9,6 +9,9 @@ function M.new()
 	local ent = entity.new()
 	mixin(ent, M)
 
+	-- Kills on touch?
+	ent.deadly = true
+
 	return ent
 end
 
@@ -30,12 +33,6 @@ end
 function M:update(dt)
 
 	entity.update(self, dt)
-
-	--All enemies kill the player if they touch
-	--TODO: cater for the size of the enemy
-	if self.x >= pl.x - 40 and self.x <= pl.x + 40 and self.y >= pl.y - 40 and self.y <= pl.y + 40 and not pl.dead then
-		pl.dead = true
-	end
 
 	if self.tileX < -1 or self.tileX > arena.width+1 or self.tileY < -1 or self.tileY > arena.width+1 then
 		self:despawn()
