@@ -11,6 +11,7 @@ function M.new()
 
 	-- Kills on touch?
 	ent.deadly = true
+	ent.vulnerable = false
 
 	return ent
 end
@@ -36,6 +37,12 @@ function M:update(dt)
 
 	if self.tileX < -1 or self.tileX > arena.width+1 or self.tileY < -1 or self.tileY > arena.width+1 then
 		self:despawn()
+	end
+
+	if self.vulnerable and self:colliding(pl) then
+		self:despawn()
+	elseif self.deadly and self:colliding(pl) then
+		pl.dead = true
 	end
 end
 

@@ -24,12 +24,14 @@ function M:update(dt)
 	--timer = time it stays in each state
 	local timer = 4
 
-	self.onFire = math.floor(math.mod((love.timer.getTime() - self.spawnTime)/timer, 2)) == 0
+	self.onFire = math.fmod(getTime() - self.spawnTime, timer*2) < timer
 
 	if self.onFire then
 		self.vel = 250
+		self.vulnerable = false
 	else
 		self.vel = 50
+		self.vulnerable = true
 	end
 end
 

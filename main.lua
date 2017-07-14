@@ -64,9 +64,6 @@ function love.update(dt)
 
 	for _, en in ipairs(enemy.active) do
 		en:update(dt)
-		if en.deadly and pl:colliding(en) then
-			pl.dead = true
-		end
 	end
 end
 
