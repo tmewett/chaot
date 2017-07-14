@@ -64,6 +64,7 @@ function love.update(dt)
 	end
 
 	pl:update(dt)
+	testBurner:update(dt)
 
 	for _, en in ipairs(enemy.active) do
 		en:update(dt)
@@ -86,31 +87,13 @@ function love.draw()
 	gfx.translate(midx-pl.x, midy-pl.y)
 	arena.draw(map)
 
-	--draw runner
-	-- Need to have enemies draw themselves in a method
-	gfx.setColor(0, 255, 20)
-	for _, run in ipairs(enemy.active) do
-		gfx.circle('fill', run.x, run.y, run.radius)
+	for _, en in ipairs(enemy.active) do
+		en:draw()
 	end
-
-	--draw burner
-	if testBurner.onFire then
-		gfx.setColor(255, 165, 0)
-	else
-		gfx.setColor(139, 69, 19)
-	end
-
-	gfx.circle('fill', testBurner.x, testBurner.y, testBurner.radius)
+	testBurner:draw()
 
 	gfx.pop()
 
-	if pl.dead then
-		gfx.setColor(255, 128, 128)
-	else
-		gfx.setColor(20, 200, 255)
-	end
-
-	gfx.circle('fill', midx, midy, pl.radius)
-
+	pl:draw()
 	gfx.print(second, 20, 20)
 end

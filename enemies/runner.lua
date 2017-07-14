@@ -56,4 +56,9 @@ function M:update(dt)
 	enemy.update(self, dt)
 end
 
+function M:draw()
+	gfx.setColor(0, 255, 20)
+	gfx.circle('fill', self.x, self.y, self.radius)
+end
+
 return M

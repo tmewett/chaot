@@ -31,4 +31,13 @@ function M:update(dt)
 	end
 end
 
+function M:draw()
+	if self.onFire then
+		gfx.setColor(255, 165, 0)
+	else
+		gfx.setColor(139, 69, 19)
+	end
+	gfx.circle('fill', self.x, self.y, self.radius)
+end
+
 return M

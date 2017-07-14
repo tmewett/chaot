@@ -34,4 +34,15 @@ function M:update(dt)
 
 end
 
+function M:draw()
+	if pl.dead then
+		gfx.setColor(255, 128, 128)
+	else
+		gfx.setColor(20, 200, 255)
+	end
+
+	gfx.circle('fill', midx, midy, pl.radius)
+
+end
+
 return M
