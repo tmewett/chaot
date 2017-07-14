@@ -35,6 +35,7 @@ function love.load()
 
 	-- seed to timestamp
 	math.randomseed(os.time())
+	gfx.setFont(gfx.newFont(32))
 
 	midx, midy = 400, 300
 
@@ -57,7 +58,7 @@ function love.update(dt)
 	bird.update()
 
 	local sec = math.floor(getTime()-startTime)
-	if sec > second then
+	if sec > second and not pl.dead then
 		second = sec
 		enemy.spawnAll(second)
 	end
@@ -73,9 +74,11 @@ function love.update(dt)
 end
 
 function love.keypressed(key)
-   if key == "escape" then
-	  love.event.quit()
-   end
+	if key == "escape" then
+		love.event.quit()
+	elseif key == "space" then
+		love.load()
+	end
 end
 
 function love.draw()
@@ -109,4 +112,5 @@ function love.draw()
 
 	gfx.circle('fill', midx, midy, pl.radius)
 
+	gfx.print(second, 20, 20)
 end
