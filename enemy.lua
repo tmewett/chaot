@@ -47,6 +47,10 @@ local seq = {}
 seq.runner = {
 	[0]={2, 3/4}
 }
+seq.burner = {
+	[0]={1, 1},
+	[1]={1, 1/5}
+}
 
 --[[ Spawns a number of the given enemy according to the probability
 dist. in seq at time sec. ]]

@@ -4,6 +4,8 @@ function M.new()
 	local en = enemy.new()
 	mixin(en, M)
 
+	en.x = math.random(arena.width*arena.side)
+	en.y = math.random(arena.height*arena.side)
 	en.radius = 25
 	en.onFire = true
 	en.vel = 200

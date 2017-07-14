@@ -45,11 +45,6 @@ function love.load()
 	map = arena.new()
 	map[2][4] = 2
 
-	testBurner = enemy.burner.new()
-	testBurner.x = 2000
-	testBurner.y = 2000
-	testBurner:spawn()
-
 	startTime = getTime()
 	second = -1
 end
@@ -64,7 +59,6 @@ function love.update(dt)
 	end
 
 	pl:update(dt)
-	testBurner:update(dt)
 
 	for _, en in ipairs(enemy.active) do
 		en:update(dt)
@@ -90,7 +84,6 @@ function love.draw()
 	for _, en in ipairs(enemy.active) do
 		en:draw()
 	end
-	testBurner:draw()
 
 	gfx.pop()
 
