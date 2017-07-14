@@ -37,6 +37,8 @@ function love.load()
 	math.randomseed(os.time())
 	gfx.setFont(gfx.newFont(32))
 
+	enemy.active = {}
+
 	midx, midy = 400, 300
 
 	pl = player.new()
@@ -53,7 +55,7 @@ function love.update(dt)
 	bird.update()
 
 	local sec = math.floor(getTime()-startTime)
-	if sec > second and not pl.dead then
+	if sec > second then
 		second = sec
 		enemy.spawnAll(second)
 	end
@@ -73,6 +75,7 @@ function love.keypressed(key)
 		love.event.quit()
 	elseif key == "space" then
 		love.load()
+		collectgarbage()
 	end
 end
 
