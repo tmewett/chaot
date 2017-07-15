@@ -5,7 +5,30 @@ M.height = 8
 
 local color = {
 	[1]={50,50,50},
-	[2]={255,50,50}
+	[2]={255,50,50},
+	[3]={255,255,50},
+	[4]={255,50,50}
+}
+
+local state = {
+	[1] = {
+		solid=false,
+		deadly=false
+	},
+	[2] = {
+		solid=false,
+		deadly=true
+	},
+	[3] = {
+		solid=true,
+		deadly=false
+	},
+	-- state 4 is constant deadly
+	[4] = {
+		solid=false,
+		deadly=true
+	}
+
 }
 
 function M.new()

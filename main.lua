@@ -46,6 +46,7 @@ function love.load()
 	pl.y = 480
 	map = arena.new()
 	map[2][4] = 2
+	map[7][3] = 3
 
 	startTime = getTime()
 	second = -1
