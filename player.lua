@@ -27,11 +27,6 @@ function M:update(dt)
 	--Apply movement changes
 	entity.update(self, dt)
 
-	--Kill if on a red square
-	if map[self.tileX][self.tileY] == 2 then
-		self.dead = true
-	end
-
 end
 
 function M:draw()

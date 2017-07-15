@@ -4,29 +4,28 @@ M.width = 8
 M.height = 8
 
 local color = {
-	[1]={50,50,50},
-	[2]={255,50,50},
-	[3]={255,255,50},
-	[4]={255,50,50}
+	tile={50,50,50},
+	flame={255,50,50},
+	flamev={255,50,50},
+	block={255,255,50}
 }
 
-local state = {
-	[1] = {
+M.state = {
+	tile = {
 		solid=false,
 		deadly=false
 	},
-	[2] = {
+	flame = {
 		solid=false,
 		deadly=true
 	},
-	[3] = {
+	flamev = {
+		solid=false,
+		deadly=true
+	},
+	block = {
 		solid=true,
 		deadly=false
-	},
-	-- state 4 is constant deadly
-	[4] = {
-		solid=false,
-		deadly=true
 	}
 
 }
@@ -36,7 +35,7 @@ function M.new()
 	for x = 1, M.width do
 		a[x] = {}
 		for y = 1, M.height do
-			a[x][y] = 1
+			a[x][y] = 'tile'
 		end
 	end
 	return a

@@ -45,8 +45,8 @@ function love.load()
 	pl.x = 640
 	pl.y = 480
 	map = arena.new()
-	map[2][4] = 2
-	map[7][3] = 3
+	map[2][4] = 'flame'
+	map[7][3] = 'block'
 
 	startTime = getTime()
 	second = -1
@@ -59,6 +59,15 @@ function love.update(dt)
 	if sec > second then
 		second = sec
 		enemy.spawnAll(second)
+	end
+
+	for x = 1, arena.width do
+		for y = 1, arena.height do
+			local state = map[x][y]
+			if arena.state[state].deadly and pl:touchingTile(x, y) then
+				pl.dead = true
+			end
+		end
 	end
 
 	pl:update(dt)
