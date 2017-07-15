@@ -33,6 +33,22 @@ function M:colliding(ent)
 	return false
 end
 
+function M:touchingTile(tx, ty)
+	-- top-left coords of tile
+	local ax, ay = (tx-1)*arena.side, (ty-1)*arena.side
+
+	--[[ Corners of the "expanded" tile, which is the hitbox for
+	the centre of the entity. Clockwise from topleft: (x1, y1),
+	(x2, y1), (x2, y2), (x1, y2) ]]
+	local x1, x2 = ax-self.radius, ax+arena.side+self.radius
+	local y1, y2 = ay-self.radius, ay+arena.side+self.radius
+
+	if (self.x > x1 and self.x < x2) and (self.y > y1 and self.y < y2) then
+		return true
+	end
+	return false
+end
+
 function M:update(dt)
 	if not self._vel then
 		self._vel = self.vel
