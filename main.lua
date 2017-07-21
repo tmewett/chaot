@@ -45,8 +45,6 @@ function love.load()
 	pl.x = 640
 	pl.y = 480
 	map = arena.new()
-	map[2][4] = 'flame'
-	map[7][3] = 'block'
 
 	startTime = getTime()
 	second = -1
@@ -64,7 +62,7 @@ function love.update(dt)
 	for x = 1, arena.width do
 		for y = 1, arena.height do
 			local state = map[x][y]
-			if arena.state[state].deadly and pl:touchingTile(x, y) then
+			if arena.deadly[state.type] and pl:touchingTile(x, y) then
 				pl.dead = true
 			end
 		end
