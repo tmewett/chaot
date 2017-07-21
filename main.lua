@@ -57,6 +57,7 @@ function love.update(dt)
 	if sec > second then
 		second = sec
 		enemy.spawnAll(second)
+		arena.spawnSeq(map, second)
 	end
 
 	for x = 1, arena.width do

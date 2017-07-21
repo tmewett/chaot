@@ -29,8 +29,6 @@ function M.new()
 			a[x][y] = tile.new('tile')
 		end
 	end
-	-- for testing
-	a[2][4] = tile.new('flame')
 	return a
 end
 
@@ -40,6 +38,28 @@ function M:draw()
 			gfx.setColor(color[self[x][y].type])
 			-- +1 and -2 to make grid lines
 			gfx.rectangle('fill', (x-1)*M.side +1, (y-1)*M.side +1, M.side-2, M.side-2)
+		end
+	end
+end
+
+local seq = {
+	[0]={3, 1},
+	[5]={5, 1}
+}
+
+function M:spawnSeq(sec)
+
+	local dist = seq[sec]
+	-- no new seq? leave everything as-is
+	if dist == nil then
+		return
+	end
+
+	for i = 1, dist[1] do
+		if math.random() < dist[2] then
+			local tx = math.random(1, M.width)
+			local ty = math.random(1, M.height)
+			self[tx][ty] = tile.new('flame')
 		end
 	end
 end
