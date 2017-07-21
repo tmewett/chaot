@@ -10,10 +10,11 @@ local color = {
 
 local tile = {}
 function tile.new(typ)
-	return {
+	local t = {
 		type=typ,
 		spawnTime=getTime()
 	}
+	return t
 end
 
 M.deadly = {
@@ -29,13 +30,13 @@ function M.new()
 			a[x][y] = tile.new('tile')
 		end
 	end
-	return a
+	M.map = a
 end
 
-function M:draw()
+function M.draw()
 	for x = 1, M.width do
 		for y = 1, M.height do
-			gfx.setColor(color[self[x][y].type])
+			gfx.setColor(color[M.map[x][y].type])
 			-- +1 and -2 to make grid lines
 			gfx.rectangle('fill', (x-1)*M.side +1, (y-1)*M.side +1, M.side-2, M.side-2)
 		end
@@ -59,7 +60,7 @@ function M:spawnSeq(sec)
 		if math.random() < dist[2] then
 			local tx = math.random(1, M.width)
 			local ty = math.random(1, M.height)
-			self[tx][ty] = tile.new('flame')
+			M.map[tx][ty] = tile.new('flame')
 		end
 	end
 end

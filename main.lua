@@ -44,7 +44,7 @@ function love.load()
 	pl = player.new()
 	pl.x = 640
 	pl.y = 480
-	map = arena.new()
+	arena.new()
 
 	startTime = getTime()
 	second = -1
@@ -62,7 +62,7 @@ function love.update(dt)
 
 	for x = 1, arena.width do
 		for y = 1, arena.height do
-			local state = map[x][y]
+			local state = arena.map[x][y]
 			if arena.deadly[state.type] and pl:touchingTile(x, y) then
 				pl.dead = true
 			end
@@ -88,7 +88,7 @@ end
 function love.draw()
 	gfx.push()
 	gfx.translate(midx-pl.x, midy-pl.y)
-	arena.draw(map)
+	arena.draw()
 
 	for _, en in ipairs(enemy.active) do
 		en:draw()
