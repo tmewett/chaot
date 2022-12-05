@@ -8,13 +8,17 @@ local color = {
 	flame={255,50,50}
 }
 
+M.flames = {}
 local tile = {}
-function tile.new(typ)
+function tile.new(x, y, typ)
 	local t = {
 		type=typ,
 		spawnTime=getTime()
 	}
-	return t
+	if typ == 'flame' then
+		table.insert(M.flames, {x, y})
+	end
+	M.map[x][y] = t
 end
 
 M.deadly = {
@@ -24,13 +28,13 @@ M.deadly = {
 
 function M.new()
 	local a = {}
+	M.map = a
 	for x = 1, M.width do
 		a[x] = {}
 		for y = 1, M.height do
-			a[x][y] = tile.new('tile')
+			tile.new(x, y, 'tile')
 		end
 	end
-	M.map = a
 end
 
 function M.draw()
@@ -56,11 +60,17 @@ function M:spawnSeq(sec)
 		return
 	end
 
+	for _, f in ipairs(M.flames) do
+		local x, y = f[0], f[1]
+		tile.new(x, y, 'tile')
+	end
+	M.flames = {}
+
 	for i = 1, dist[1] do
 		if math.random() < dist[2] then
 			local tx = math.random(1, M.width)
 			local ty = math.random(1, M.height)
-			M.map[tx][ty] = tile.new('flame')
+			tile.new(tx, ty, 'flame')
 		end
 	end
 end

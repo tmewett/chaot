@@ -38,6 +38,7 @@ function love.load()
 	gfx.setFont(gfx.newFont(32))
 
 	enemy.active = {}
+	arena.flames = {}
 
 	midx, midy = 400, 300
 
